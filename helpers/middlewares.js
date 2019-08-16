@@ -28,3 +28,12 @@ exports.validationLoggin = () => (req, res, next) => {
   }
 };
 
+exports.validationNewPhoto = () => (req, res, next) => {
+  const {imageUrl, creator, category} = req.body;
+  if (!imageUrl || !creator || !category) {
+    next(createError(422));
+  } else {
+    next();
+  }
+}
+
