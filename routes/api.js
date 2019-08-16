@@ -28,4 +28,15 @@ router.post('/photos/add', async (req, res, next) => {
   }
 })
 
+router.delete('/photos/:id/delete', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await Photo.findByIdAndRemove(id);
+    res.status(200).json({"message": "Photo Deleted"});
+  }
+  catch(error) {
+    next(error);
+  }
+})
+
 module.exports = router;
