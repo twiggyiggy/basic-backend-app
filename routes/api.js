@@ -8,12 +8,25 @@ const router = express.Router();
 const Photo = require('../models/Photo');
 const User = require('../models/User');
 
-const validationNewPhoto = require('../helpers/middlewares');
+const { validationNewPhoto } = require('../helpers/middlewares');
 
 router.get('/photos', async (req, res, next) => {
   try {
     const allPhotos = await Photo.find();
     res.status(200).json(allPhotos);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/photos/:userId', async (req, res, next) => {
+  const userId = req.params.userId;
+  try {
+    const user = await User.findById(userId);
+    const userPhotoIds = user.photos;
+    const userPhotos = [];
+
+    res.status(200).json(userPhotosIds);
   } catch (error) {
     next(error);
   }
