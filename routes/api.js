@@ -8,7 +8,7 @@ const router = express.Router();
 const Photo = require('../models/Photo');
 const User = require('../models/User');
 
-const validationNewPhoto = require('../helpers/middlewares')
+const validationNewPhoto = require('../helpers/middlewares');
 
 router.get('/photos', async (req, res, next) => {
   try {
@@ -19,24 +19,25 @@ router.get('/photos', async (req, res, next) => {
   }
 });
 
-router.post('/photos/add', async (req, res, next) => {
-  validationNewPhoto();
-  const data = req.body;
-  try {
+router.post('/photos/add',
+  validationNewPhoto(),
+  async (req, res, next) => {
+    const data = req.body;
+    try {
     // 0. create photo in DB
-    const newPhoto = await Photo.create(data);
-    res.status(200).json(newPhoto);
-    // 1. get the created photo's id - save in a var
-    const photoId = newPhoto._id;
-    // 2. get the current user's id - save in a var
-    const userId = req.session.currentUser._id;
-    // 3. update the user's document: add photo id to photos array
-    const photoReferenced = await User.findByIdAndUpdate(userId, { $push: { photos: photoId } });
-    res.status(200).json(photoReferenced);
-  } catch (error) {
-    next(error);
-  }
-});
+      const newPhoto = await Photo.create(data);
+      res.status(200).json(newPhoto);
+      // 1. get the created photo's id - save in a var
+      const photoId = newPhoto._id;
+      // 2. get the current user's id - save in a var
+      const userId = req.session.currentUser._id;
+      // 3. update the user's document: add photo id to photos array
+      const photoReferenced = await User.findByIdAndUpdate(userId, { $push: { photos: photoId } });
+      res.status(200).json(photoReferenced);
+    } catch (error) {
+      next(error);
+    }
+  });
 
 router.delete('/photos/:id/delete', async (req, res, next) => {
   try {
