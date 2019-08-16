@@ -16,13 +16,12 @@ const {
 
 router.get('/allUsers', async (req, res, next) => {
   try {
-    const allUsers = await User.find()
-    res.json(allUsers)
+    const allUsers = await User.find().populate('photos');
+    res.json(allUsers);
+  } catch (error) {
+    next(error);
   }
-  catch (error) {
-    next(error)
-  }
-})
+});
 
 router.get('/me', isLoggedIn(), (req, res, next) => {
   res.json(req.session.currentUser);
