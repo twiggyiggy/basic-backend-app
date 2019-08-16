@@ -14,8 +14,14 @@ const {
   validationLoggin
 } = require('../helpers/middlewares');
 
-router.get('/allUsers', (req, res, next) => {
-  res.json(User.find())
+router.get('/allUsers', async (req, res, next) => {
+  try {
+    const allUsers = await User.find()
+    res.json(allUsers)
+  }
+  catch (error) {
+    next(error)
+  }
 })
 
 router.get('/me', isLoggedIn(), (req, res, next) => {
