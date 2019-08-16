@@ -129,7 +129,7 @@ Photo model
    imgUrl:String,
    creator: ObjectId,
    category: {
-     enum: ['hands', 'feet', 'faces', 'figure', 'other']
+     enum: ['hands', 'feet', 'face', 'figure', 'other']
    },
     created: {
     type: Date,
