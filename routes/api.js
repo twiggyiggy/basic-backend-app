@@ -8,6 +8,8 @@ const router = express.Router();
 const Photo = require('../models/Photo');
 const User = require('../models/User');
 
+const validationNewPhoto = require('../helpers/middlewares')
+
 router.get('/photos', async (req, res, next) => {
   try {
     const allPhotos = await Photo.find();
@@ -18,6 +20,7 @@ router.get('/photos', async (req, res, next) => {
 });
 
 router.post('/photos/add', async (req, res, next) => {
+  validationNewPhoto();
   const data = req.body;
   try {
     // 0. create photo in DB
