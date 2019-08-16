@@ -39,4 +39,16 @@ router.delete('/photos/:id/delete', async (req, res, next) => {
   }
 })
 
+router.put('/photos/:id/edit', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const updatedPhoto = await Photo.findByIdAndUpdate(id, data, {new: true});
+    res.status(200).json(updatedPhoto);
+  }
+  catch (error) {
+    next(error);
+  }
+})
+
 module.exports = router;
