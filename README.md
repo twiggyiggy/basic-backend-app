@@ -150,10 +150,10 @@ Photo model
 | POST        | /auth/login                 | {username, password}         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session  |
 
 | POST        | /auth/logout                | (empty)                      | 204            | 400          | Logs out the user                                             |
-| GET         | /gallery                    |                              |                | 400          | Show all photos                                               |
-| POST        | /gallery/add                | {}                           | 201            | 400          | add and save a new photo                                      |
-| PUT         | /gallery/edit/:id           | {imgUrl}                     | 200            | 400          | edit information about photo                                  | ?
-| DELETE      | /gallery/delete/:id         | {id}                         | 201            | 400          | delete tournament                                             |
+| GET         | /photos/                    |                              |                | 400          | Show all photos                                               |
+| POST        | /photos/add                | {}                           | 201            | 400          | add and save a new photo                                      |
+| PUT         | /photos/:id/edit           | {imgUrl}                     | 200            | 400          | edit information about photo                                  | ?
+| DELETE      | /photos/:id/delete       | {id}                         | 201            | 400          | delete photo                                           |
 
 
 <br>
