@@ -24,9 +24,13 @@ router.get('/photos/:userId', async (req, res, next) => {
   try {
     const user = await User.findById(userId);
     const userPhotoIds = user.photos;
-    const userPhotos = [];
 
-    res.status(200).json(userPhotosIds);
+    const userPhotos = [];
+    for (let i = 0; i < userPhotoIds.length; i++) {
+      let photo = await Photo.findById(userPhotoIds[i])
+      userPhotos.push(photo)
+    }
+    res.status(200).json(userPhotos);
   } catch (error) {
     next(error);
   }
