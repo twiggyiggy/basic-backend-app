@@ -19,18 +19,18 @@ router.get('/photos', async (req, res, next) => {
   }
 });
 
-router.get('/photos/:userId', async (req, res, next) => {
-  const userId = req.params.userId;
-  try {
-    const user = await User.findById(userId);
-    const userPhotoIds = user.photos;
-    const userPhotos = [];
+// router.get('/photos/:userId', async (req, res, next) => {
+//   const userId = req.params.userId;
+//   try {
+//     const user = await User.findById(userId);
+//     const userPhotoIds = user.photos;
+//     const userPhotos = [];
 
-    res.status(200).json(userPhotosIds);
-  } catch (error) {
-    next(error);
-  }
-});
+//     res.status(200).json(userPhotosIds);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 router.post('/photos/add',
   validationNewPhoto(),
