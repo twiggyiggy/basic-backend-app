@@ -53,7 +53,7 @@ Other:
 ## Routes
 | Path                      | Component            | Permissions | Behaviour                                                    |
 | ------------------------- | -------------------- | ----------- | ------------------------------------------------------------ |
-| `/`                       | SplashPage           | public      | Home page                                                    |
+| `/`                       | SplashPage           | anon only   | Home page                                                    |
 | `/auth/signup`            | SignupPage           | anon only   | Signup form, link to login, navigate to homepage after signup|
 | `/auth/login`             | LoginPage            | anon only   | Login form, link to signup, navigate to homepage after login |
 | `/auth/logout`            |       n/a            | anon only   | Navigate to homepage after logout, expire session            |
