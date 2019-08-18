@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const createError = require('http-errors'); // need this?
+// const createError = require('http-errors'); // need this?
 
 const router = express.Router();
 
@@ -19,18 +19,23 @@ router.get('/photos', async (req, res, next) => {
   }
 });
 
-// router.get('/photos/:userId', async (req, res, next) => {
-//   const userId = req.params.userId;
-//   try {
-//     const user = await User.findById(userId);
-//     const userPhotoIds = user.photos;
-//     const userPhotos = [];
+router.get('/photos/:userId', async (req, res, next) => {
+  const userId = req.params.userId;
+  try {
+    const user = await User.findById(userId);
+    const userPhotoIds = user.photos;
 
-//     res.status(200).json(userPhotosIds);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+    const userPhotos = [];
+    for (let i = 0; i < userPhotoIds.length; i++) {
+      const photo = await Photo.findById(userPhotoIds[i]);
+      userPhotos.push(photo);
+    } // refactor?
+
+    res.status(200).json(userPhotos);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.post('/photos/add',
   validationNewPhoto(),
