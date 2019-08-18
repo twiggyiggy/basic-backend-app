@@ -24,6 +24,12 @@ router.get('/photos/:userId', async (req, res, next) => {
   try {
     const user = await User.findById(userId);
     const userPhotoIds = user.photos;
+  //   "photos": [
+  //     "5d56bc1979b757662fe7f763",
+  //     "5d56bc1d79b757662fe7f764",
+  //     "5d56bc2179b757662fe7f765",
+  //     "5d56bc2779b757662fe7f766"
+  // ],
 
     const userPhotos = [];
     for (let i = 0; i < userPhotoIds.length; i++) {
