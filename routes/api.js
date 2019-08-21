@@ -62,6 +62,12 @@ router.delete('/photos/:id/delete', async (req, res, next) => {
   try {
     const id = req.params.id;
     await Photo.findByIdAndRemove(id);
+    const userId = req.session.currentUser._id;
+
+    await User.findByIdAndUpdate(userId,
+      {$pop: {photo: id}},
+      {safe: true, upsert: true})
+
     res.status(200).json({ message: 'Photo Deleted' });
   } catch (error) {
     next(error);
