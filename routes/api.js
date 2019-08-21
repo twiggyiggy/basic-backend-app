@@ -41,16 +41,13 @@ router.post('/photos/add',
   validationNewPhoto(),
   async (req, res, next) => {
     const data = req.body;
+    console.log(data);
     try {
       // 0. create photo in DB
       const newPhoto = await Photo.create(data);
-      res.status(200).json(newPhoto);
-      // 1. get the created photo's id - save in a var
       const photoId = newPhoto._id;
-      // 2. get the current user's id - save in a var
       console.log('req.session', req.session);
       const userId = req.session.currentUser._id;
-      // 3. update the user's document: add photo id to photos array
       const photoReferenced = await User.findByIdAndUpdate(userId, { $push: { photos: photoId } });
       res.status(200).json(photoReferenced);
     } catch (error) {
@@ -63,11 +60,11 @@ router.delete('/photos/:id/delete', async (req, res, next) => {
     const id = req.params.id;
     await Photo.findByIdAndRemove(id);
     const userId = req.session.currentUser._id;
-
-    await User.findByIdAndUpdate(userId,
-      { $pop: { photo: id } },
-      { safe: true, upsert: true });
-
+    await User.findByIdAndUpdate(userId, { $pull: { photos: id } });
+    // const userId = req.session.currentUser._id;
+    // await User.findByIdAndUpdate(userId,
+    //   {$pop: {photo: id}},
+    //   {safe: true, upsert: true})
     res.status(200).json({ message: 'Photo Deleted' });
   } catch (error) {
     next(error);
