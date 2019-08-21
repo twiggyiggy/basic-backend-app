@@ -60,7 +60,14 @@ router.post('/photos/add',
 router.delete('/photos/:id/delete', async (req, res, next) => {
   try {
     const id = req.params.id;
-    await Photo.findByIdAndRemove(id);
+    const mess = await Photo.findByIdAndRemove(id);
+    console.log(mess)
+    const userId = req.session.currentUser._id;
+
+    await User.findByIdAndUpdate(userId,
+      {$pull: {photo: id}},
+      {safe: true, upsert: true})
+
     res.status(200).json({ message: 'Photo Deleted' });
   } catch (error) {
     next(error);
