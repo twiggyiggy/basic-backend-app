@@ -1,0 +1,21 @@
+
+
+{
+    "imageUrl": "https://www.rd.com/wp-content/uploads/2018/08/11-Health-Secrets-Your-Hands-Are-Trying-to-Tell-You-6.jpg",
+    "category": "hands"
+}
+
+{
+    "imageUrl": "https://faculty.washington.edu/ajko/books/uist/images/human-hands.jpg",
+    "category": "hands"
+}
+
+{
+    "imageUrl": "https://i.pinimg.com/736x/34/30/4d/34304d0a0e134bf394778d4bbc097244.jpg",
+    "category": "face"
+}
+
+{
+    "imageUrl": "https://i.pinimg.com/474x/ff/60/b4/ff60b43b62df3816bab08dd4de74291f.jpg",
+    "category": "figure"
+}
